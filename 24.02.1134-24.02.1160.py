@@ -17,7 +17,7 @@ if "tasks" not in st.session_state:
     st.session_state.tasks = []
 
 # Judul dan Menu
-st.title("📋 TaskMate - Manajemen Tugas Harian")
+st.title("📋 TaskMate - Manajemen Tugas")
 st.write("### Pilihan Menu:")
 st.write("1. Lihat Tugas")
 st.write("2. Tambah Tugas")
