@@ -1,5 +1,24 @@
 import streamlit as st
 
+# 🌟 Styling Title
+st.markdown("""
+    <style>
+    .title {
+        font-size:40px !important;
+        color:#6a1b9a;
+        font-weight:bold;
+    }
+    .footer {
+        position: fixed;
+        bottom: 10px;
+        font-size: 13px;
+        color: grey;
+        text-align: center;
+        width: 100%;
+    }
+    </style>
+""", unsafe_allow_html=True)
+
 # Kelas Tugas
 class Task:
     def __init__(self, id, nama, deadline, selesai=False):
@@ -17,38 +36,41 @@ if "tasks" not in st.session_state:
     st.session_state.tasks = []
 
 # Judul dan Menu
-st.title("📋 TaskMate - Manajemen Tugas Harian")
-st.write("### Pilihan Menu:")
-st.write("1. Lihat Tugas")
-st.write("2. Tambah Tugas")
-st.write("3. Ubah Tugas")
-st.write("4. Hapus Tugas")
+st.markdown("<div class='title'>📋 TaskMate - Manajemen Tugas Harian</div>", unsafe_allow_html=True)
+st.sidebar.title("👥 Info Kelompok")
+st.sidebar.write("👩 Nama: Fulanah\n🧑 Nama: Temanmu")
+
+st.markdown("### 🛠️ Pilihan Menu:")
+st.markdown("1. 🔍 Lihat Tugas")
+st.markdown("2. ➕ Tambah Tugas")
+st.markdown("3. ✏ Ubah Tugas")
+st.markdown("4. 🗑 Hapus Tugas")
 
 menu = st.text_input("Masukkan angka menu (1-4):")
 
 # Menu 1 - Lihat
 if menu == "1":
-    st.subheader("📄 Daftar Tugas")
+    st.subheader("🔍 Lihat Tugas")
     if st.session_state.tasks:
         for i, task in enumerate(st.session_state.tasks):
-            st.write(f"{i+1}. {task}")
+            st.success(f"{i+1}. {task}")
     else:
-        st.info("Belum ada tugas.")
+        st.info("📭 Belum ada tugas.")
 
 # Menu 2 - Tambah
 elif menu == "2":
     st.subheader("➕ Tambah Tugas")
-    id = st.number_input("Masukkan ID", step=1)
-    nama = st.text_input("Masukkan Nama Tugas")
-    deadline = st.text_input("Masukkan Deadline (contoh: 30-07-2025)")
-    if st.button("Simpan"):
+    id = st.number_input("🆔 Masukkan ID", step=1)
+    nama = st.text_input("✍ Masukkan Nama Tugas")
+    deadline = st.text_input("📅 Masukkan Deadline (contoh: 30-07-2025)")
+    if st.button("💾 Simpan"):
         if nama and deadline:
             new_task = Task(id, nama, deadline)
             st.session_state.tasks.append(new_task)
-            st.success("Tugas berhasil ditambahkan.")
+            st.success("✅ Tugas berhasil ditambahkan.")
         else:
-            st.warning("Semua kolom harus diisi.")
-
+            st.warning("⚠️ Semua kolom harus diisi.")
+            
 # Menu 3 - Ubah
 elif menu == "3":
     st.subheader("✏ Ubah Tugas")
